@@ -1,0 +1,122 @@
+[
+  {
+    "name": "John F. Kennedy International Airport",
+    "code": "JFK",
+    "cityId": 1
+  },
+  {
+    "name": "LaGuardia Airport",
+    "code": "LGA",
+    "cityId": 1
+  },
+  {
+    "name": "Newark Liberty International Airport",
+    "code": "EWR",
+    "cityId": 1
+  },
+  {
+    "name": "Los Angeles International Airport",
+    "code": "LAX",
+    "cityId": 2
+  },
+  {
+    "name": "Hollywood Burbank Airport",
+    "code": "BUR",
+    "cityId": 2
+  },
+  {
+    "name": "Long Beach Airport",
+    "code": "LGB",
+    "cityId": 2
+  },
+  {
+    "name": "O'Hare International Airport",
+    "code": "ORD",
+    "cityId": 3
+  },
+  {
+    "name": "Midway International Airport",
+    "code": "MDW",
+    "cityId": 3
+  },
+  {
+    "name": "Chicago Executive Airport",
+    "code": "PWK",
+    "cityId": 3
+  },
+  {
+    "name": "George Bush Intercontinental Airport",
+    "code": "IAH",
+    "cityId": 4
+  },
+  {
+    "name": "William P. Hobby Airport",
+    "code": "HOU",
+    "cityId": 4
+  },
+  {
+    "name": "Ellington Airport",
+    "code": "EFD",
+    "cityId": 4
+  },
+  {
+    "name": "Phoenix Sky Harbor International Airport",
+    "code": "PHX",
+    "cityId": 5
+  },
+  {
+    "name": "Philadelphia International Airport",
+    "code": "PHL",
+    "cityId": 6
+  },
+  {
+    "name": "San Antonio International Airport",
+    "code": "SAT",
+    "cityId": 7
+  },
+  {
+    "name": "Stinson Municipal Airport",
+    "code": "SSF",
+    "cityId": 7
+  },
+  {
+    "name": "San Diego International Airport",
+    "code": "SAN",
+    "cityId": 8
+  },
+  {
+    "name": "Montgomery-Gibbs Executive Airport",
+    "code": "MYF",
+    "cityId": 8
+  },
+  {
+    "name": "Brown Field Municipal Airport",
+    "code": "SDM",
+    "cityId": 8
+  },
+  {
+    "name": "Dallas/Fort Worth International Airport",
+    "code": "DFW",
+    "cityId": 9
+  },
+  {
+    "name": "Dallas Love Field Airport",
+    "code": "DAL",
+    "cityId": 9
+  },
+  {
+    "name": "Addison Airport",
+    "code": "ADS",
+    "cityId": 9
+  },
+  {
+    "name": "Norman Y. Mineta San Jose International Airport",
+    "code": "SJC",
+    "cityId": 10
+  },
+  {
+    "name": "Reid-Hillview Airport",
+    "code": "RHV",
+    "cityId": 10
+  }
+]

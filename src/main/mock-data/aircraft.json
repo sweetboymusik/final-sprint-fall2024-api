@@ -1,0 +1,102 @@
+[
+  {
+    "type": "Boeing 747",
+    "passengerCapacity": 366,
+    "airlineId": 1
+  },
+  {
+    "type": "Boeing 737",
+    "passengerCapacity": 160,
+    "airlineId": 1
+  },
+  {
+    "type": "Airbus A321",
+    "passengerCapacity": 185,
+    "airlineId": 1
+  },
+  {
+    "type": "Airbus A330",
+    "passengerCapacity": 250,
+    "airlineId": 1
+  },
+  {
+    "type": "Boeing 757",
+    "passengerCapacity": 228,
+    "airlineId": 1
+  },
+  {
+    "type": "Boeing 777",
+    "passengerCapacity": 396,
+    "airlineId": 2
+  },
+  {
+    "type": "Airbus A320",
+    "passengerCapacity": 150,
+    "airlineId": 2
+  },
+  {
+    "type": "Embraer E175",
+    "passengerCapacity": 76,
+    "airlineId": 2
+  },
+  {
+    "type": "Airbus A319",
+    "passengerCapacity": 128,
+    "airlineId": 2
+  },
+  {
+    "type": "Boeing 767",
+    "passengerCapacity": 216,
+    "airlineId": 2
+  },
+  {
+    "type": "Boeing 787",
+    "passengerCapacity": 296,
+    "airlineId": 3
+  },
+  {
+    "type": "Airbus A320neo",
+    "passengerCapacity": 194,
+    "airlineId": 3
+  },
+  {
+    "type": "Boeing 737 MAX 8",
+    "passengerCapacity": 178,
+    "airlineId": 3
+  },
+  {
+    "type": "Airbus A220",
+    "passengerCapacity": 130,
+    "airlineId": 3
+  },
+  {
+    "type": "Boeing 737-900",
+    "passengerCapacity": 179,
+    "airlineId": 3
+  },
+  {
+    "type": "Boeing 737-700",
+    "passengerCapacity": 143,
+    "airlineId": 4
+  },
+  {
+    "type": "Boeing 737-800",
+    "passengerCapacity": 175,
+    "airlineId": 4
+  },
+  {
+    "type": "Boeing 737 MAX 7",
+    "passengerCapacity": 153,
+    "airlineId": 4
+  },
+  {
+    "type": "Boeing 737 MAX 8",
+    "passengerCapacity": 175,
+    "airlineId": 4
+  },
+  {
+    "type": "Airbus A220-300",
+    "passengerCapacity": 137,
+    "airlineId": 5
+  }
+]

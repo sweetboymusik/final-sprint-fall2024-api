@@ -1,0 +1,52 @@
+[
+  {
+    "name": "New York",
+    "state": "NY",
+    "population": 8419600
+  },
+  {
+    "name": "Los Angeles",
+    "state": "CA",
+    "population": 3980400
+  },
+  {
+    "name": "Chicago",
+    "state": "IL",
+    "population": 2716000
+  },
+  {
+    "name": "Houston",
+    "state": "TX",
+    "population": 2328000
+  },
+  {
+    "name": "Phoenix",
+    "state": "AZ",
+    "population": 1690000
+  },
+  {
+    "name": "Philadelphia",
+    "state": "PA",
+    "population": 1584200
+  },
+  {
+    "name": "San Antonio",
+    "state": "TX",
+    "population": 1547200
+  },
+  {
+    "name": "San Diego",
+    "state": "CA",
+    "population": 1423851
+  },
+  {
+    "name": "Dallas",
+    "state": "TX",
+    "population": 1343573
+  },
+  {
+    "name": "San Jose",
+    "state": "CA",
+    "population": 1035317
+  }
+]

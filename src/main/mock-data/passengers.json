@@ -1,0 +1,212 @@
+[
+  {
+    "firstName": "Elliott",
+    "lastName": "Butt",
+    "phoneNumber": "15555555551",
+    "email": "elliott.butt@email.com",
+    "cityId": 1
+  },
+  {
+    "firstName": "Sarah",
+    "lastName": "Jones",
+    "phoneNumber": "15555555552",
+    "email": "sarah.jones@email.com",
+    "cityId": 1
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Brown",
+    "phoneNumber": "15555555553",
+    "email": "michael.brown@email.com",
+    "cityId": 2
+  },
+  {
+    "firstName": "Jessica",
+    "lastName": "Davis",
+    "phoneNumber": "15555555554",
+    "email": "jessica.davis@email.com",
+    "cityId": 2
+  },
+  {
+    "firstName": "David",
+    "lastName": "Miller",
+    "phoneNumber": "15555555555",
+    "email": "david.miller@email.com",
+    "cityId": 2
+  },
+  {
+    "firstName": "Emily",
+    "lastName": "Wilson",
+    "phoneNumber": "15555555556",
+    "email": "emily.wilson@email.com",
+    "cityId": 3
+  },
+  {
+    "firstName": "James",
+    "lastName": "Taylor",
+    "phoneNumber": "15555555557",
+    "email": "james.taylor@email.com",
+    "cityId": 3
+  },
+  {
+    "firstName": "Amanda",
+    "lastName": "Anderson",
+    "phoneNumber": "15555555558",
+    "email": "amanda.anderson@email.com",
+    "cityId": 3
+  },
+  {
+    "firstName": "John",
+    "lastName": "Thomas",
+    "phoneNumber": "15555555559",
+    "email": "john.thomas@email.com",
+    "cityId": 4
+  },
+  {
+    "firstName": "Olivia",
+    "lastName": "White",
+    "phoneNumber": "15555555560",
+    "email": "olivia.white@email.com",
+    "cityId": 4
+  },
+  {
+    "firstName": "Lucas",
+    "lastName": "Harris",
+    "phoneNumber": "15555555561",
+    "email": "lucas.harris@email.com",
+    "cityId": 4
+  },
+  {
+    "firstName": "Isabella",
+    "lastName": "Clark",
+    "phoneNumber": "15555555562",
+    "email": "isabella.clark@email.com",
+    "cityId": 5
+  },
+  {
+    "firstName": "Sophia",
+    "lastName": "Martinez",
+    "phoneNumber": "15555555563",
+    "email": "sophia.martinez@email.com",
+    "cityId": 5
+  },
+  {
+    "firstName": "Alexander",
+    "lastName": "Lewis",
+    "phoneNumber": "15555555564",
+    "email": "alexander.lewis@email.com",
+    "cityId": 5
+  },
+  {
+    "firstName": "Mason",
+    "lastName": "Walker",
+    "phoneNumber": "15555555565",
+    "email": "mason.walker@email.com",
+    "cityId": 6
+  },
+  {
+    "firstName": "Madison",
+    "lastName": "Young",
+    "phoneNumber": "15555555566",
+    "email": "madison.young@email.com",
+    "cityId": 6
+  },
+  {
+    "firstName": "Jackson",
+    "lastName": "Allen",
+    "phoneNumber": "15555555567",
+    "email": "jackson.allen@email.com",
+    "cityId": 7
+  },
+  {
+    "firstName": "Ava",
+    "lastName": "King",
+    "phoneNumber": "15555555568",
+    "email": "ava.king@email.com",
+    "cityId": 7
+  },
+  {
+    "firstName": "Liam",
+    "lastName": "Wright",
+    "phoneNumber": "15555555569",
+    "email": "liam.wright@email.com",
+    "cityId": 8
+  },
+  {
+    "firstName": "Charlotte",
+    "lastName": "Scott",
+    "phoneNumber": "15555555570",
+    "email": "charlotte.scott@email.com",
+    "cityId": 8
+  },
+  {
+    "firstName": "Benjamin",
+    "lastName": "Torres",
+    "phoneNumber": "15555555571",
+    "email": "benjamin.torres@email.com",
+    "cityId": 9
+  },
+  {
+    "firstName": "Chloe",
+    "lastName": "Nguyen",
+    "phoneNumber": "15555555572",
+    "email": "chloe.nguyen@email.com",
+    "cityId": 9
+  },
+  {
+    "firstName": "Henry",
+    "lastName": "Garcia",
+    "phoneNumber": "15555555573",
+    "email": "henry.garcia@email.com",
+    "cityId": 10
+  },
+  {
+    "firstName": "Victoria",
+    "lastName": "Lopez",
+    "phoneNumber": "15555555574",
+    "email": "victoria.lopez@email.com",
+    "cityId": 10
+  },
+  {
+    "firstName": "Grace",
+    "lastName": "Kim",
+    "phoneNumber": "15555555575",
+    "email": "grace.kim@email.com",
+    "cityId": 1
+  },
+  {
+    "firstName": "Ethan",
+    "lastName": "Gonzalez",
+    "phoneNumber": "15555555576",
+    "email": "ethan.gonzalez@email.com",
+    "cityId": 1
+  },
+  {
+    "firstName": "Ella",
+    "lastName": "Perez",
+    "phoneNumber": "15555555577",
+    "email": "ella.perez@email.com",
+    "cityId": 2
+  },
+  {
+    "firstName": "Samuel",
+    "lastName": "Baker",
+    "phoneNumber": "15555555578",
+    "email": "samuel.baker@email.com",
+    "cityId": 3
+  },
+  {
+    "firstName": "Amelia",
+    "lastName": "Edwards",
+    "phoneNumber": "15555555579",
+    "email": "amelia.edwards@email.com",
+    "cityId": 4
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Sanders",
+    "phoneNumber": "15555555580",
+    "email": "daniel.sanders@email.com",
+    "cityId": 5
+  }
+]
