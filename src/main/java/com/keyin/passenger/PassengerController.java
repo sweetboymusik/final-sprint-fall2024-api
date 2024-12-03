@@ -39,7 +39,7 @@ public class PassengerController {
         return passengerService.addPassenger(passengerDTO);
     }
 
-    @PostMapping("/passenger/id/{id}")
+    @PatchMapping("/passenger/id/{id}")
     @JsonView(Views.PassengerView.class)
     public Passenger updatePassengerById(@PathVariable int id, @RequestBody PassengerDTO passengerDTO) {
         return passengerService.updatePassengerById(id, passengerDTO);

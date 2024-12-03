@@ -36,7 +36,7 @@ public class FlightController {
 
     }
 
-    @PostMapping("/flight/id/{id}")
+    @PatchMapping("/flight/id/{id}")
     @JsonView(Views.FlightView.class)
     public Flight updateFlightById(@PathVariable int id, @RequestBody FlightDTO flightDTO) {
         return flightService.updateFlightById(id, flightDTO);

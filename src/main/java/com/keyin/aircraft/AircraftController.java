@@ -29,7 +29,7 @@ public class AircraftController {
         return aircraftService.addAircraft(aircraftDTO);
     }
 
-    @PostMapping("/aircraft/id/{id}")
+    @PatchMapping("/aircraft/id/{id}")
     @JsonView(Views.AircraftView.class)
     public Aircraft updateAircraftById(@PathVariable int id, @RequestBody AircraftDTO aircraftDTO) {
         return aircraftService.updateAircraftById(id, aircraftDTO);

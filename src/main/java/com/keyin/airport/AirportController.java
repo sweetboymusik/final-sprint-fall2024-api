@@ -35,7 +35,7 @@ public class AirportController {
         return airportService.addAirport(airportDTO);
     }
 
-    @PostMapping("/airport/id/{id}")
+    @PatchMapping("/airport/id/{id}")
     @JsonView(Views.AirportView.class)
     public Airport updateAirportById(@PathVariable int id, @RequestBody AirportDTO airportDTO) {
         return airportService.updateAirportById(id, airportDTO);

@@ -35,7 +35,7 @@ public class CityController {
         return cityService.addCity(city);
     }
 
-    @PostMapping("/city/id/{id}")
+    @PatchMapping("/city/id/{id}")
     @JsonView(Views.CityView.class)
     public City updateCityById(@PathVariable int id, @RequestBody City city) {
         return cityService.updateCityById(id, city);

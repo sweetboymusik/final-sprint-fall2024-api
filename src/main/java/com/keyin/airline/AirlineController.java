@@ -35,7 +35,7 @@ public class AirlineController {
         return airlineService.addAirline(airline);
     }
 
-    @PostMapping("/airline/id/{id}")
+    @PatchMapping("/airline/id/{id}")
     @JsonView(Views.AirlineView.class)
     public Airline updateAirlineById(@PathVariable int id, @RequestBody Airline airline) {
         return airlineService.updateAirlineById(id, airline);
