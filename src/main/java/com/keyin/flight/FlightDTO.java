@@ -1,11 +1,7 @@
 package com.keyin.flight;
 
-import com.keyin.aircraft.Aircraft;
-import com.keyin.airport.Airport;
-import com.keyin.passenger.Passenger;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class FlightDTO {
     private LocalDateTime departure;

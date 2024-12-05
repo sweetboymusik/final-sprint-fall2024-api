@@ -1,7 +1,6 @@
 package com.keyin.passenger;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.keyin.city.CityService;
 import com.keyin.views.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +10,6 @@ import org.springframework.web.bind.annotation.*;
 public class PassengerController {
     @Autowired
     private PassengerService passengerService;
-
-    @Autowired
-    private CityService cityService;
 
     @GetMapping("/passenger/all")
     @JsonView(Views.PassengerView.class)

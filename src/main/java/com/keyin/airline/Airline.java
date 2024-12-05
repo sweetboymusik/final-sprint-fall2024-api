@@ -1,6 +1,5 @@
 package com.keyin.airline;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.keyin.aircraft.Aircraft;
 import com.keyin.views.Views;

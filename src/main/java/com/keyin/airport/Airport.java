@@ -5,8 +5,6 @@ import com.keyin.city.City;
 import com.keyin.views.Views;
 import jakarta.persistence.*;
 
-import javax.swing.text.View;
-
 @Entity
 public class Airport {
     @Id
