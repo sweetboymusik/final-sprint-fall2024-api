@@ -9,6 +9,10 @@ public class AircraftFormattedDTO {
         this.nameFormatted = type + " (ID: " + id + ")";
     }
 
+    public AircraftFormattedDTO(int id, String type, String airline) {
+        this.nameFormatted = type + " (ID: " + id + ") | " + airline;
+    }
+
     // getters and setters
     public String getNameFormatted() {
         return this.nameFormatted;

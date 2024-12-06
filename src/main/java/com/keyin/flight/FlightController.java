@@ -12,9 +12,8 @@ public class FlightController {
     private FlightService flightService;
 
     @GetMapping("/flight/all")
-    @JsonView(Views.FlightView.class)
-    public Iterable<Flight> getAllFlights() {
-        return flightService.getAllFlights();
+    public Iterable<FlightTableDTO> getAllFlightsForTable() {
+        return flightService.getAllFlightsForTable();
     }
 
     @GetMapping("/flight/id/{id}")
