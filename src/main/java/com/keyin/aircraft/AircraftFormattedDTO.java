@@ -5,8 +5,8 @@ public class AircraftFormattedDTO {
     private String nameFormatted;
 
     // constructors
-    public AircraftFormattedDTO(int id, String name) {
-        this.nameFormatted = name + " (" + id;
+    public AircraftFormattedDTO(int id, String type) {
+        this.nameFormatted = type + " (ID: " + id + ")";
     }
 
     // getters and setters
