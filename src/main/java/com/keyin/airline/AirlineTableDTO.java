@@ -5,20 +5,29 @@ import java.util.List;
 import com.keyin.aircraft.AircraftFormattedDTO;
 
 public class AirlineTableDTO {
-
     // instance variables
+    private int id;
     private String name;
-    private String code;
+    private String country;
     private List<AircraftFormattedDTO> aircraft;
 
     // constructor
-    public AirlineTableDTO(String name, String code, List<AircraftFormattedDTO> aircraft) {
+    public AirlineTableDTO(int id, String name, String code, List<AircraftFormattedDTO> aircraft) {
+        this.id = id;
         this.name = name;
-        this.code = code;
+        this.country = code;
         this.aircraft = aircraft;
     }
 
     // getters and setters
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -27,12 +36,12 @@ public class AirlineTableDTO {
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCountry(String code) {
+        this.country = code;
     }
 
     public List<AircraftFormattedDTO> getAircraft() {

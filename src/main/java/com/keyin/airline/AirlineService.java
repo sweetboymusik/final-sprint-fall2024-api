@@ -33,7 +33,8 @@ public class AirlineService {
 
             }
 
-            AirlineTableDTO arlineFormattedDTO = new AirlineTableDTO(airline.getName(), airline.getName(),
+            AirlineTableDTO arlineFormattedDTO = new AirlineTableDTO(airline.getId(), airline.getName(),
+                    airline.getCountry(),
                     aircraftList);
 
             airlineDTOs.add(arlineFormattedDTO);
