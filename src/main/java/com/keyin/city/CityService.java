@@ -1,6 +1,12 @@
 package com.keyin.city;
 
+import com.keyin.airport.Airport;
+import com.keyin.airport.AirportFormattedDTO;
 import com.keyin.exceptions.EntityNotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +17,24 @@ public class CityService {
 
     public Iterable<City> getAllCities() {
         return cityRepository.findAll();
+    }
+
+    public Iterable<CityTableDTO> getAllCitiesForTable() {
+        Iterable<City> cities = cityRepository.findAll();
+        List<CityTableDTO> cityDTOs = new ArrayList<>();
+
+        for (City city : cities) {
+            List<AirportFormattedDTO> airportFormattedNames = new ArrayList<>();
+            for (Airport airport : city.getAirports()) {
+                AirportFormattedDTO airportFormatted = new AirportFormattedDTO(airport.getName(), airport.getCode());
+                airportFormattedNames.add(airportFormatted);
+            }
+
+            cityDTOs.add(new CityTableDTO(city.getId(), city.getName(), city.getState(), city.getPopulation(),
+                    airportFormattedNames));
+        }
+
+        return cityDTOs;
     }
 
     public City addCity(City city) {
@@ -35,9 +59,12 @@ public class CityService {
     public City updateCityById(int id, City city) {
         City cityToUpdate = getCityById(id);
 
-        if (city.getName() != null) cityToUpdate.setName(city.getName());
-        if (city.getState() != null) cityToUpdate.setState(city.getState());
-        if (city.getPopulation() > 0) cityToUpdate.setPopulation(city.getPopulation());
+        if (city.getName() != null)
+            cityToUpdate.setName(city.getName());
+        if (city.getState() != null)
+            cityToUpdate.setState(city.getState());
+        if (city.getPopulation() > 0)
+            cityToUpdate.setPopulation(city.getPopulation());
 
         return cityRepository.save(cityToUpdate);
     }
@@ -46,4 +73,5 @@ public class CityService {
         City cityToDelete = getCityById(id);
         cityRepository.delete(cityToDelete);
     }
+
 }
