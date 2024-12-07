@@ -9,18 +9,18 @@ import jakarta.persistence.*;
 public class Aircraft {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({Views.AircraftView.class, Views.AirlineView.class, Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.AircraftView.class, Views.AirlineView.class, Views.FlightView.class, Views.PassengerView.class })
 
     private int id;
 
-    @JsonView({Views.AircraftView.class, Views.AirlineView.class, Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.AircraftView.class, Views.AirlineView.class, Views.FlightView.class, Views.PassengerView.class })
     private String type;
 
-    @JsonView({Views.AircraftView.class, Views.AirlineView.class, Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.AircraftView.class, Views.AirlineView.class, Views.FlightView.class, Views.PassengerView.class })
     private int passengerCapacity;
 
     @ManyToOne
-    @JsonView({Views.AircraftView.class, Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.AircraftView.class, Views.FlightView.class, Views.PassengerView.class })
     private Airline airline;
 
     // constructors
