@@ -12,9 +12,8 @@ public class AirportController {
     private AirportService airportService;
 
     @GetMapping("/airport/all")
-    @JsonView(Views.AirportView.class)
-    public Iterable<Airport> getAllAirports() {
-        return airportService.getAllAirports();
+    public Iterable<AirportTableDTO> getAllAirportsForTable() {
+        return airportService.getAllAirportsForTable();
     }
 
     @GetMapping("/airport/id/{id}")

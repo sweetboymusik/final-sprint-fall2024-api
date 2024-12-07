@@ -12,9 +12,8 @@ public class AircraftController {
     private AircraftService aircraftService;
 
     @GetMapping("/aircraft/all")
-    @JsonView(Views.AircraftView.class)
-    public Iterable<Aircraft> getAllAircraft() {
-        return aircraftService.getAllAircraft();
+    public Iterable<AircraftTableDTO> getAllAircraftForTable() {
+        return aircraftService.getAllAircraftForTable();
     }
 
     @GetMapping("/aircraft/id/{id}")

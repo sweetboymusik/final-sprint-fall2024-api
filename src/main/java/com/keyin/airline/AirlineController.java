@@ -12,9 +12,8 @@ public class AirlineController {
     private AirlineService airlineService;
 
     @GetMapping("/airline/all")
-    @JsonView(Views.AirlineView.class)
-    public Iterable<Airline> getAllAirlines() {
-        return airlineService.getAllAirlines();
+    public Iterable<AirlineTableDTO> getAllCities() {
+        return airlineService.getAllAirlinesForTable();
     }
 
     @GetMapping("/airline/id/{id}")

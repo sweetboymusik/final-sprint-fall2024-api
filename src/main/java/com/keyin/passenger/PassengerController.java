@@ -12,9 +12,8 @@ public class PassengerController {
     private PassengerService passengerService;
 
     @GetMapping("/passenger/all")
-    @JsonView(Views.PassengerView.class)
-    public Iterable<Passenger> getAllPassengers() {
-        return passengerService.getAllPassengers();
+    public Iterable<PassengerTableDTO> getAllPassengersForTable() {
+        return passengerService.getAllPassengersForTable();
     }
 
     @GetMapping("passenger/id/{id}")
