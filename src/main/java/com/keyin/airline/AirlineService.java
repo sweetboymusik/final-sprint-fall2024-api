@@ -1,7 +1,6 @@
 package com.keyin.airline;
 
 import com.keyin.aircraft.Aircraft;
-import com.keyin.aircraft.AircraftFormattedDTO;
 import com.keyin.exceptions.EntityNotFoundException;
 
 import java.util.ArrayList;
@@ -24,18 +23,16 @@ public class AirlineService {
         List<AirlineTableDTO> airlineDTOs = new ArrayList<>();
 
         for (Airline airline : airlines) {
-            List<AircraftFormattedDTO> aircraftList = new ArrayList<>();
+            int aircraft = 0;
 
-            for (Aircraft aircraft : airline.getAircraftList()) {
-                AircraftFormattedDTO aircraftFormatted = new AircraftFormattedDTO(aircraft.getId(), aircraft.getType());
-
-                aircraftList.add(aircraftFormatted);
-
+            for (@SuppressWarnings("unused")
+            Aircraft craft : airline.getAircraftList()) {
+                aircraft++;
             }
 
             AirlineTableDTO arlineFormattedDTO = new AirlineTableDTO(airline.getId(), airline.getName(),
                     airline.getCountry(),
-                    aircraftList);
+                    aircraft);
 
             airlineDTOs.add(arlineFormattedDTO);
         }

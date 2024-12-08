@@ -1,18 +1,14 @@
 package com.keyin.city;
 
-import java.util.List;
-
-import com.keyin.airport.AirportFormattedDTO;
-
 public class CityTableDTO {
     private int id;
     private String name;
     private String state;
     private int population;
-    private List<AirportFormattedDTO> airports;
+    private int airports;
 
     // Constructor
-    public CityTableDTO(int id, String name, String state, int population, List<AirportFormattedDTO> airportNames) {
+    public CityTableDTO(int id, String name, String state, int population, int airportNames) {
         this.id = id;
         this.name = name;
         this.state = state;
@@ -53,11 +49,11 @@ public class CityTableDTO {
         this.population = population;
     }
 
-    public List<AirportFormattedDTO> getAirports() {
+    public int getAirports() {
         return airports;
     }
 
-    public void setAirports(List<AirportFormattedDTO> airportNames) {
+    public void setAirports(int airportNames) {
         this.airports = airportNames;
     }
 }

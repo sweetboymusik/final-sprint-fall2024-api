@@ -1,7 +1,6 @@
 package com.keyin.city;
 
 import com.keyin.airport.Airport;
-import com.keyin.airport.AirportFormattedDTO;
 import com.keyin.exceptions.EntityNotFoundException;
 
 import java.util.ArrayList;
@@ -24,14 +23,15 @@ public class CityService {
         List<CityTableDTO> cityDTOs = new ArrayList<>();
 
         for (City city : cities) {
-            List<AirportFormattedDTO> airportFormattedNames = new ArrayList<>();
-            for (Airport airport : city.getAirports()) {
-                AirportFormattedDTO airportFormatted = new AirportFormattedDTO(airport.getName(), airport.getCode());
-                airportFormattedNames.add(airportFormatted);
+            int airports = 0;
+
+            for (@SuppressWarnings("unused")
+            Airport airport : city.getAirports()) {
+                airports++;
             }
 
             cityDTOs.add(new CityTableDTO(city.getId(), city.getName(), city.getState(), city.getPopulation(),
-                    airportFormattedNames));
+                    airports));
         }
 
         return cityDTOs;

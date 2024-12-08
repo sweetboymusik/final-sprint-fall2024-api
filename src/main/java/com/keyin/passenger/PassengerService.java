@@ -5,7 +5,6 @@ import com.keyin.city.CityFormattedDTO;
 import com.keyin.city.CityService;
 import com.keyin.exceptions.EntityNotFoundException;
 import com.keyin.flight.Flight;
-import com.keyin.flight.FlightFormattedDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,19 +29,18 @@ public class PassengerService {
         List<PassengerTableDTO> passengerDTOs = new ArrayList<>();
 
         for (Passenger passenger : passengers) {
-            List<FlightFormattedDTO> flightFormattedDTOs = new ArrayList<>();
+            int flights = 0;
 
-            for (Flight flight : passenger.getFlights()) {
-                FlightFormattedDTO flightFormattedDTO = new FlightFormattedDTO(flight.getId(),
-                        flight.getOrigin().getCode(), flight.getDestination().getCode());
-                flightFormattedDTOs.add(flightFormattedDTO);
+            for (@SuppressWarnings("unused")
+            Flight flight : passenger.getFlights()) {
+                flights++;
             }
 
             CityFormattedDTO city = new CityFormattedDTO(passenger.getCity().getName(), passenger.getCity().getState());
 
             PassengerTableDTO passengerTableDTO = new PassengerTableDTO(passenger.getId(), passenger.getFirstName(),
                     passenger.getLastName(), passenger.getPhoneNumber(), passenger.getEmail(), city,
-                    flightFormattedDTOs);
+                    flights);
 
             passengerDTOs.add(passengerTableDTO);
         }

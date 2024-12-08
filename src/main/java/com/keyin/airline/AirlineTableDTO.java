@@ -1,18 +1,14 @@
 package com.keyin.airline;
 
-import java.util.List;
-
-import com.keyin.aircraft.AircraftFormattedDTO;
-
 public class AirlineTableDTO {
     // instance variables
     private int id;
     private String name;
     private String country;
-    private List<AircraftFormattedDTO> aircraft;
+    private int aircraft;
 
     // constructor
-    public AirlineTableDTO(int id, String name, String code, List<AircraftFormattedDTO> aircraft) {
+    public AirlineTableDTO(int id, String name, String code, int aircraft) {
         this.id = id;
         this.name = name;
         this.country = code;
@@ -44,11 +40,11 @@ public class AirlineTableDTO {
         this.country = code;
     }
 
-    public List<AircraftFormattedDTO> getAircraft() {
+    public int getAircraft() {
         return this.aircraft;
     }
 
-    public void setAircraft(List<AircraftFormattedDTO> aircraft) {
+    public void setAircraft(int aircraft) {
         this.aircraft = aircraft;
     }
 
