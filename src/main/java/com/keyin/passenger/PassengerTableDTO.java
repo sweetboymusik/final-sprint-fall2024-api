@@ -1,9 +1,6 @@
 package com.keyin.passenger;
 
-import java.util.List;
-
 import com.keyin.city.CityFormattedDTO;
-import com.keyin.flight.FlightFormattedDTO;
 
 public class PassengerTableDTO {
     // instance variables
@@ -12,12 +9,12 @@ public class PassengerTableDTO {
     private String phoneNumber;
     private String email;
     private CityFormattedDTO city;
-    private List<FlightFormattedDTO> flights;
+    private int flights;
 
     // constructor
     public PassengerTableDTO(int id, String firstName, String lastName, String phoneNumber, String email,
             CityFormattedDTO city,
-            List<FlightFormattedDTO> flights) {
+            int flights) {
         this.id = id;
         this.fullName = firstName + " " + lastName;
         this.phoneNumber = phoneNumber;
@@ -67,11 +64,11 @@ public class PassengerTableDTO {
         this.city = city;
     }
 
-    public List<FlightFormattedDTO> getFlights() {
+    public int getFlights() {
         return this.flights;
     }
 
-    public void setFlights(List<FlightFormattedDTO> flights) {
+    public void setFlights(int flights) {
         this.flights = flights;
     }
 }
