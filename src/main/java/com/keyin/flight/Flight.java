@@ -16,27 +16,27 @@ import java.util.List;
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.FlightView.class, Views.PassengerView.class })
     private int id;
 
-    @JsonView({Views.FlightView.class, Views.PassengerView.class})
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonView({ Views.FlightView.class, Views.PassengerView.class })
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     private LocalDateTime departure;
 
-    @JsonView({Views.FlightView.class, Views.PassengerView.class})
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonView({ Views.FlightView.class, Views.PassengerView.class })
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     private LocalDateTime arrival;
 
     @ManyToOne
-    @JsonView({Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.FlightView.class, Views.PassengerView.class })
     private Airport origin;
 
     @ManyToOne
-    @JsonView({Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.FlightView.class, Views.PassengerView.class })
     private Airport destination;
 
     @ManyToOne
-    @JsonView({Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.FlightView.class, Views.PassengerView.class })
     private Aircraft aircraft;
 
     @JsonView(Views.FlightView.class)
@@ -47,9 +47,11 @@ public class Flight {
     private List<Passenger> passengerList;
 
     // constructors
-    public Flight() {}
+    public Flight() {
+    }
 
-    public Flight(LocalDateTime departure, LocalDateTime arrival, Airport origin, Airport destination, Aircraft aircraft, int numberOfPassengers) {
+    public Flight(LocalDateTime departure, LocalDateTime arrival, Airport origin, Airport destination,
+            Aircraft aircraft, int numberOfPassengers) {
         this.departure = departure;
         this.arrival = arrival;
         this.origin = origin;
@@ -59,7 +61,7 @@ public class Flight {
         this.passengerList = new ArrayList<Passenger>();
     }
 
-    public Flight(FlightDTO flightDTO,Airport origin, Airport destination, Aircraft aircraft) {
+    public Flight(FlightDTO flightDTO, Airport origin, Airport destination, Aircraft aircraft) {
         this.departure = flightDTO.getDeparture();
         this.arrival = flightDTO.getArrival();
         this.origin = origin;
