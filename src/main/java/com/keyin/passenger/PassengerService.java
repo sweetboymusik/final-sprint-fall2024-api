@@ -1,11 +1,15 @@
 package com.keyin.passenger;
 
+import com.keyin.aircraft.AircraftFormattedDTO;
+import com.keyin.airport.AirportFormattedDTO;
 import com.keyin.city.City;
 import com.keyin.city.CityFormattedDTO;
 import com.keyin.city.CityService;
 import com.keyin.exceptions.EntityNotFoundException;
 import com.keyin.flight.Flight;
+import com.keyin.flight.FlightTableDTO;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +62,52 @@ public class PassengerService {
     public Passenger getPassengerById(int id) {
         return passengerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Passenger not found"));
+    }
+
+    public PassengerDetailsDTO getPassengerDetailsById(int id) {
+        Passenger passenger = passengerRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Passenger not found"));
+
+        List<FlightTableDTO> flightTables = new ArrayList<>();
+
+        for (Flight flight : passenger.getFlights()) {
+            System.out.println(flight);
+            // get origin info
+            CityFormattedDTO originCity = new CityFormattedDTO(flight.getOrigin().getCity().getName(),
+                    flight.getOrigin().getCity().getState());
+            AirportFormattedDTO origin = new AirportFormattedDTO(flight.getOrigin().getName(),
+                    flight.getOrigin().getCode(), originCity);
+
+            // get destination info
+            CityFormattedDTO destinationCity = new CityFormattedDTO(flight.getDestination().getCity().getName(),
+                    flight.getDestination().getCity().getState());
+            AirportFormattedDTO destination = new AirportFormattedDTO(flight.getDestination().getName(),
+                    flight.getDestination().getCode(), destinationCity);
+
+            // get departure/arrival as string
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a");
+            String departureString = flight.getDeparture().format(formatter);
+            String arrivalString = flight.getArrival().format(formatter);
+
+            // get aircraft details
+            AircraftFormattedDTO aircraft = new AircraftFormattedDTO(flight.getAircraft().getId(),
+                    flight.getAircraft().getType(), flight.getAircraft().getAirline().getName());
+
+            FlightTableDTO flightTable = new FlightTableDTO(flight.getId(), departureString, arrivalString,
+                    origin, destination,
+                    aircraft, flight.getNumberOfPassengers());
+
+            flightTables.add(flightTable);
+        }
+
+        return new PassengerDetailsDTO(
+                passenger.getId(),
+                passenger.getFirstName(),
+                passenger.getLastName(),
+                passenger.getPhoneNumber(),
+                passenger.getEmail(),
+                passenger.getCity(),
+                flightTables);
     }
 
     public Passenger getPassengerByName(String name) {

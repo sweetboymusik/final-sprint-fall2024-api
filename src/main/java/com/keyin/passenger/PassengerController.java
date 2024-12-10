@@ -18,8 +18,8 @@ public class PassengerController {
 
     @GetMapping("passenger/id/{id}")
     @JsonView(Views.PassengerView.class)
-    public Passenger getPassengerById(@PathVariable int id) {
-        return passengerService.getPassengerById(id);
+    public PassengerDetailsDTO getPassengerDetailsById(@PathVariable int id) {
+        return passengerService.getPassengerDetailsById(id);
     }
 
     @GetMapping("passenger/name/{name}")

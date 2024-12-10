@@ -1,7 +1,11 @@
 package com.keyin.aircraft;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.keyin.views.Views;
+
 public class AircraftFormattedDTO {
     // instance variables
+    @JsonView({ Views.PassengerView.class })
     private String nameFormatted;
 
     // constructors

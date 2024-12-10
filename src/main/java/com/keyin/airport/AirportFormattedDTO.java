@@ -1,9 +1,12 @@
 package com.keyin.airport;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.keyin.city.CityFormattedDTO;
+import com.keyin.views.Views;
 
 public class AirportFormattedDTO {
     // instance variables
+    @JsonView({ Views.PassengerView.class })
     private String formattedName;
 
     // constructors

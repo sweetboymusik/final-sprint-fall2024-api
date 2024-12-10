@@ -1,15 +1,23 @@
 package com.keyin.flight;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.keyin.aircraft.AircraftFormattedDTO;
 import com.keyin.airport.AirportFormattedDTO;
+import com.keyin.views.Views;
 
 public class FlightTableDTO {
     // instance variables
+    @JsonView({ Views.PassengerView.class })
     private int id;
+    @JsonView({ Views.PassengerView.class })
     private String departure;
+    @JsonView({ Views.PassengerView.class })
     private String arrival;
+    @JsonView({ Views.PassengerView.class })
     private AirportFormattedDTO origin;
+    @JsonView({ Views.PassengerView.class })
     private AirportFormattedDTO destination;
+    @JsonView({ Views.PassengerView.class })
     private AircraftFormattedDTO aircraft;
     private int numberOfPassengers;
 
