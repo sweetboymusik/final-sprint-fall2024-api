@@ -101,6 +101,10 @@ public class FlightService {
         passengerToAdd.getFlights().add(flight);
         passengerRepository.save(passengerToAdd);
 
+        int updatedPassengerCount = flight.getPassengerList().size();
+        flight.setNumberOfPassengers(updatedPassengerCount);
+        flightRepository.save(flight);
+
         return "Passenger added to flight successfully";
     }
 
