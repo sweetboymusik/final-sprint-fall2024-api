@@ -3,21 +3,23 @@ package com.keyin.airport;
 import com.keyin.city.CityFormattedDTO;
 
 public class AirportTableDTO {
-    // instance variables
+    // Instance variables
     private int id;
     private String name;
     private String code;
     private CityFormattedDTO city;
+    private int gateCount;
 
-    // constructors
-    public AirportTableDTO(int id, String name, String code, CityFormattedDTO cityFormatted) {
+    // Constructor
+    public AirportTableDTO(int id, String name, String code, CityFormattedDTO city, int gateCount) {
         this.id = id;
         this.name = name;
         this.code = code;
-        this.city = cityFormatted;
+        this.city = city;
+        this.gateCount = gateCount;
     }
 
-    // getters and setters
+    // Getters and setters
     public int getId() {
         return this.id;
     }
@@ -46,7 +48,15 @@ public class AirportTableDTO {
         return this.city;
     }
 
-    public void setCity(CityFormattedDTO cityFormatted) {
-        this.city = cityFormatted;
+    public void setCity(CityFormattedDTO city) {
+        this.city = city;
+    }
+
+    public int getGateCount() {
+        return gateCount;
+    }
+
+    public void setGateCount(int gateCount) {
+        this.gateCount = gateCount;
     }
 }

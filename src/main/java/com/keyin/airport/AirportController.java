@@ -1,6 +1,7 @@
 package com.keyin.airport;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.keyin.gate.Gate;
 import com.keyin.views.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class AirportController {
         return airportService.getAirportById(id);
     }
 
-    @GetMapping("airport/name/{name}")
+    @GetMapping("/airport/name/{name}")
     @JsonView(Views.AirportView.class)
     public Airport getAirportByName(@PathVariable String name) {
         return airportService.getAirportByName(name);
@@ -32,6 +33,11 @@ public class AirportController {
     @JsonView(Views.AirportView.class)
     public Airport addAirport(@RequestBody AirportDTO airportDTO) {
         return airportService.addAirport(airportDTO);
+    }
+
+    @PostMapping("/airport/{id}/gates")
+    public Gate addGateToAirport(@PathVariable int id, @RequestBody Gate gate) {
+        return airportService.addGateToAirport(id, gate);
     }
 
     @PatchMapping("/airport/id/{id}")

@@ -1,54 +1,59 @@
-// package com.keyin.gate;
+package com.keyin.gate;
 
-// import com.keyin.airport.Airport;
-// import com.fasterxml.jackson.annotation.JsonBackReference;
-// import jakarta.persistence.*;
+import com.keyin.airport.Airport;
+import com.keyin.views.Views;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
-// @Entity
-// public class Gate {
-// // instance variables
-// @Id
-// @GeneratedValue(strategy = GenerationType.IDENTITY)
-// private int id;
+import jakarta.persistence.*;
 
-// private String gateNumber;
+@Entity
+public class Gate {
+    // instance variables
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView({ Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
+    private int id;
 
-// @ManyToOne
-// @JsonBackReference
-// @JoinColumn(name = "airport_id")
-// private Airport airport;
+    @JsonView({ Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
+    private String gateNumber;
 
-// // constructors
-// public Gate() {
-// }
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "airport_id")
+    private Airport airport;
 
-// public Gate(String gateNumber, Airport airport) {
-// this.gateNumber = gateNumber;
-// this.airport = airport;
-// }
+    // constructors
+    public Gate() {
+    }
 
-// // getters and setters
-// public int getId() {
-// return id;
-// }
+    public Gate(String gateNumber, Airport airport) {
+        this.gateNumber = gateNumber;
+        this.airport = airport;
+    }
 
-// public void setId(int id) {
-// this.id = id;
-// }
+    // getters and setters
+    public int getId() {
+        return id;
+    }
 
-// public String getGateNumber() {
-// return gateNumber;
-// }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-// public void setGateNumber(String gateNumber) {
-// this.gateNumber = gateNumber;
-// }
+    public String getGateNumber() {
+        return gateNumber;
+    }
 
-// public Airport getAirport() {
-// return airport;
-// }
+    public void setGateNumber(String gateNumber) {
+        this.gateNumber = gateNumber;
+    }
 
-// public void setAirport(Airport airport) {
-// this.airport = airport;
-// }
-// }
+    public Airport getAirport() {
+        return airport;
+    }
+
+    public void setAirport(Airport airport) {
+        this.airport = airport;
+    }
+}

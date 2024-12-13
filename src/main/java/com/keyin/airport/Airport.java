@@ -1,7 +1,11 @@
 package com.keyin.airport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.keyin.city.City;
+import com.keyin.gate.Gate;
 import com.keyin.views.Views;
 import jakarta.persistence.*;
 
@@ -9,18 +13,22 @@ import jakarta.persistence.*;
 public class Airport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
     private int id;
 
-    @JsonView({Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
     private String name;
 
-    @JsonView({Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
     private String code;
 
     @ManyToOne
-    @JsonView({Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class})
+    @JsonView({ Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
     private City city;
+
+    @OneToMany(mappedBy = "airport", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonView({ Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
+    private List<Gate> gates = new ArrayList<>();
 
     // constructors
     public Airport() {
@@ -30,12 +38,14 @@ public class Airport {
         this.name = name;
         this.code = code;
         this.city = city;
+        this.gates = new ArrayList<>();
     }
 
     public Airport(AirportDTO airportDTO, City city) {
         this.name = airportDTO.getName();
         this.code = airportDTO.getCode();
         this.city = city;
+        this.gates = new ArrayList<>();
     }
 
     // getters and setters
@@ -69,5 +79,13 @@ public class Airport {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public List<Gate> getGates() {
+        return this.gates;
+    }
+
+    public void setGates(List<Gate> gates) {
+        this.gates = gates;
     }
 }

@@ -4,6 +4,8 @@ import com.keyin.city.City;
 import com.keyin.city.CityFormattedDTO;
 import com.keyin.city.CityService;
 import com.keyin.exceptions.EntityNotFoundException;
+import com.keyin.gate.Gate;
+import com.keyin.gate.GateRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,9 @@ public class AirportService {
     @Autowired
     private CityService cityService;
 
+    @Autowired
+    private GateRepository gateRepository;
+
     public Iterable<Airport> getAllAirports() {
         return airportRepository.findAll();
     }
@@ -28,10 +33,12 @@ public class AirportService {
         List<AirportTableDTO> airportDTOs = new ArrayList<>();
 
         for (Airport airport : airports) {
+            int gateCount = airport.getGates().size();
+
             CityFormattedDTO cityFormatted = new CityFormattedDTO(airport.getCity().getName(),
                     airport.getCity().getState());
             AirportTableDTO airportTableDTO = new AirportTableDTO(airport.getId(), airport.getName(), airport.getCode(),
-                    cityFormatted);
+                    cityFormatted, gateCount);
 
             airportDTOs.add(airportTableDTO);
         }
@@ -44,6 +51,14 @@ public class AirportService {
         Airport airport = new Airport(airportDTO, city);
 
         return airportRepository.save(airport);
+    }
+
+    public Gate addGateToAirport(int airportId, Gate gate) {
+        Airport airport = airportRepository.findById(airportId)
+                .orElseThrow(() -> new RuntimeException("Airport not found"));
+
+        gate.setAirport(airport);
+        return gateRepository.save(gate);
     }
 
     public Airport getAirportById(int id) {
