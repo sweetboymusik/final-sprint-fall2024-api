@@ -3,11 +3,13 @@ package com.keyin.flight;
 import com.keyin.aircraft.Aircraft;
 import com.keyin.aircraft.AircraftFormattedDTO;
 import com.keyin.aircraft.AircraftService;
-import com.keyin.airport.Airport;
 import com.keyin.airport.AirportFormattedDTO;
-import com.keyin.airport.AirportService;
+import com.keyin.airport.AirportSingleDTO;
 import com.keyin.city.CityFormattedDTO;
 import com.keyin.exceptions.EntityNotFoundException;
+import com.keyin.gate.Gate;
+import com.keyin.gate.GateFlightDTO;
+import com.keyin.gate.GateRepository;
 import com.keyin.passenger.Passenger;
 import com.keyin.passenger.PassengerRepository;
 import com.keyin.passenger.PassengerService;
@@ -32,10 +34,10 @@ public class FlightService {
     private PassengerRepository passengerRepository;
 
     @Autowired
-    private AircraftService aircraftService;
+    private GateRepository gateRepository;
 
     @Autowired
-    private AirportService airportService;
+    private AircraftService aircraftService;
 
     public Iterable<Flight> getAllFlights() {
         return flightRepository.findAll();
@@ -47,16 +49,22 @@ public class FlightService {
 
         for (Flight flight : flights) {
             // get origin info
-            CityFormattedDTO originCity = new CityFormattedDTO(flight.getOrigin().getCity().getName(),
-                    flight.getOrigin().getCity().getState());
-            AirportFormattedDTO origin = new AirportFormattedDTO(flight.getOrigin().getName(),
-                    flight.getOrigin().getCode(), originCity);
+            CityFormattedDTO originCity = new CityFormattedDTO(
+                    flight.getOriginGate().getAirport().getCity().getName(),
+                    flight.getOriginGate().getAirport().getCity().getState());
+            AirportFormattedDTO origin = new AirportFormattedDTO(
+                    flight.getOriginGate().getAirport().getName(),
+                    flight.getOriginGate().getAirport().getCode(), originCity,
+                    flight.getOriginGate().getGateNumber());
 
             // get destination info
-            CityFormattedDTO destinationCity = new CityFormattedDTO(flight.getDestination().getCity().getName(),
-                    flight.getDestination().getCity().getState());
-            AirportFormattedDTO destination = new AirportFormattedDTO(flight.getDestination().getName(),
-                    flight.getDestination().getCode(), destinationCity);
+            CityFormattedDTO destinationCity = new CityFormattedDTO(
+                    flight.getDestinationGate().getAirport().getCity().getName(),
+                    flight.getDestinationGate().getAirport().getCity().getState());
+            AirportFormattedDTO destination = new AirportFormattedDTO(
+                    flight.getDestinationGate().getAirport().getName(),
+                    flight.getDestinationGate().getAirport().getCode(), destinationCity,
+                    flight.getDestinationGate().getGateNumber());
 
             // get departure/arrival as string
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a");
@@ -80,11 +88,25 @@ public class FlightService {
     }
 
     public Flight addFlight(FlightDTO flightDTO) {
-        Airport origin = airportService.getAirportById(flightDTO.getOriginAirportId());
-        Airport destination = airportService.getAirportById(flightDTO.getDestinationAirportId());
+        Gate originGate = gateRepository.findById(flightDTO.getOriginGateId())
+                .orElseThrow(() -> new RuntimeException("Origin gate not found"));
+
+        Gate destinationGate = gateRepository.findById(flightDTO.getDestinationGateId())
+                .orElseThrow(() -> new RuntimeException("Destination gate not found"));
+
+        if (originGate.getAirport().getId() == destinationGate.getAirport().getId()) {
+            throw new RuntimeException("Origin and destination gates cannot belong to the same airport");
+        }
+
         Aircraft aircraft = aircraftService.getAircraftById(flightDTO.getAircraftId());
 
-        Flight flight = new Flight(flightDTO, origin, destination, aircraft);
+        Flight flight = new Flight(
+                flightDTO.getDeparture(),
+                flightDTO.getArrival(),
+                originGate,
+                destinationGate,
+                aircraft,
+                0);
 
         return flightRepository.save(flight);
     }
@@ -113,6 +135,38 @@ public class FlightService {
                 .orElseThrow(() -> new EntityNotFoundException("Flight not found"));
     }
 
+    public FlightDetailsDTO getFlightDetailsById(int id) {
+        Flight flight = flightRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Flight not found"));
+
+        GateFlightDTO originGateDTO = new GateFlightDTO(
+                flight.getOriginGate().getId(),
+                flight.getOriginGate().getGateNumber(),
+                new AirportSingleDTO(
+                        flight.getOriginGate().getAirport().getId(),
+                        flight.getOriginGate().getAirport().getName(),
+                        flight.getOriginGate().getAirport().getCode(),
+                        flight.getOriginGate().getAirport().getCity()));
+
+        GateFlightDTO destinationGateDTO = new GateFlightDTO(
+                flight.getDestinationGate().getId(),
+                flight.getDestinationGate().getGateNumber(),
+                new AirportSingleDTO(
+                        flight.getDestinationGate().getAirport().getId(),
+                        flight.getDestinationGate().getAirport().getName(),
+                        flight.getDestinationGate().getAirport().getCode(),
+                        flight.getDestinationGate().getAirport().getCity()));
+
+        return new FlightDetailsDTO(
+                flight.getId(),
+                flight.getDeparture(),
+                flight.getArrival(),
+                originGateDTO,
+                destinationGateDTO,
+                flight.getPassengerList(),
+                flight.getAircraft());
+    }
+
     public Flight updateFlightById(int id, FlightDTO flightDTO) {
         Flight flightToUpdate = getFlightById(id);
 
@@ -121,22 +175,29 @@ public class FlightService {
             flightToUpdate.setAircraft(aircraft);
         }
 
-        if (flightDTO.getOriginAirportId() != 0) {
-            Airport airport = airportService.getAirportById(flightDTO.getOriginAirportId());
-            flightToUpdate.setOrigin(airport);
+        if (flightDTO.getOriginGateId() != 0) {
+            Gate originGate = gateRepository.findById(flightDTO.getOriginGateId())
+                    .orElseThrow(() -> new RuntimeException("Origin gate not found"));
+            flightToUpdate.setOriginGate(originGate);
         }
 
-        if (flightDTO.getDestinationAirportId() != 0) {
-            Airport airport = airportService.getAirportById(flightDTO.getDestinationAirportId());
-            flightToUpdate.setDestination(airport);
+        if (flightDTO.getDestinationGateId() != 0) {
+            Gate destinationGate = gateRepository.findById(flightDTO.getDestinationGateId())
+                    .orElseThrow(() -> new RuntimeException("Destination gate not found"));
+            flightToUpdate.setDestinationGate(destinationGate);
         }
 
-        if (flightDTO.getArrival() != null)
+        if (flightDTO.getArrival() != null) {
             flightToUpdate.setArrival(flightDTO.getArrival());
-        if (flightDTO.getDeparture() != null)
+        }
+
+        if (flightDTO.getDeparture() != null) {
             flightToUpdate.setDeparture(flightDTO.getDeparture());
-        if (flightDTO.getNumberOfPassengers() != 0)
+        }
+
+        if (flightDTO.getNumberOfPassengers() != 0) {
             flightToUpdate.setNumberOfPassengers(flightDTO.getNumberOfPassengers());
+        }
 
         return flightRepository.save(flightToUpdate);
     }

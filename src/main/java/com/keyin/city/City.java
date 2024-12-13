@@ -1,5 +1,6 @@
 package com.keyin.city;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.keyin.airport.Airport;
 import com.keyin.views.Views;
@@ -11,19 +12,20 @@ import java.util.List;
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({Views.CityView.class, Views.AirportView.class, Views.PassengerView.class, Views.FlightView.class})
+    @JsonView({ Views.CityView.class, Views.AirportView.class, Views.PassengerView.class, Views.FlightView.class })
     private int id;
 
-    @JsonView({Views.CityView.class, Views.AirportView.class, Views.PassengerView.class, Views.FlightView.class})
+    @JsonView({ Views.CityView.class, Views.AirportView.class, Views.PassengerView.class, Views.FlightView.class })
     private String name;
 
-    @JsonView({Views.CityView.class, Views.AirportView.class, Views.PassengerView.class, Views.FlightView.class})
+    @JsonView({ Views.CityView.class, Views.AirportView.class, Views.PassengerView.class, Views.FlightView.class })
     private String state;
 
-    @JsonView({Views.CityView.class, Views.AirportView.class, Views.PassengerView.class, Views.FlightView.class})
+    @JsonView({ Views.CityView.class, Views.AirportView.class, Views.PassengerView.class, Views.FlightView.class })
     private int population;
 
     @OneToMany(mappedBy = "city")
+    @JsonManagedReference
     @JsonView(Views.CityView.class)
     private List<Airport> airports;
 

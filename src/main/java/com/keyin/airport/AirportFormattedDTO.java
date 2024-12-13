@@ -14,8 +14,12 @@ public class AirportFormattedDTO {
         this.formattedName = name + " (" + code + ")";
     }
 
-    public AirportFormattedDTO(String name, String code, CityFormattedDTO city) {
-        this.formattedName = name + " (" + code + ") | " + city.getFormattedAddress();
+    public AirportFormattedDTO(String name, String code, String gate) {
+        this.formattedName = name + " (" + code + ") | Gate " + gate;
+    }
+
+    public AirportFormattedDTO(String name, String code, CityFormattedDTO city, String gate) {
+        this.formattedName = name + " (" + code + ") | " + city.getFormattedAddress() + " | Gate " + gate;
     }
 
     // getters and setters

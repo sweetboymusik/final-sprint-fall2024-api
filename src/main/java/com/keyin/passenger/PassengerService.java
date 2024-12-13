@@ -1,6 +1,7 @@
 package com.keyin.passenger;
 
 import com.keyin.aircraft.AircraftFormattedDTO;
+import com.keyin.airport.Airport;
 import com.keyin.airport.AirportFormattedDTO;
 import com.keyin.city.City;
 import com.keyin.city.CityFormattedDTO;
@@ -8,6 +9,7 @@ import com.keyin.city.CityService;
 import com.keyin.exceptions.EntityNotFoundException;
 import com.keyin.flight.Flight;
 import com.keyin.flight.FlightTableDTO;
+import com.keyin.gate.Gate;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -71,18 +73,33 @@ public class PassengerService {
         List<FlightTableDTO> flightTables = new ArrayList<>();
 
         for (Flight flight : passenger.getFlights()) {
-            System.out.println(flight);
-            // get origin info
-            CityFormattedDTO originCity = new CityFormattedDTO(flight.getOrigin().getCity().getName(),
-                    flight.getOrigin().getCity().getState());
-            AirportFormattedDTO origin = new AirportFormattedDTO(flight.getOrigin().getName(),
-                    flight.getOrigin().getCode(), originCity);
+            // get origin gate and its airport information
+            Gate originGate = flight.getOriginGate();
 
-            // get destination info
-            CityFormattedDTO destinationCity = new CityFormattedDTO(flight.getDestination().getCity().getName(),
-                    flight.getDestination().getCity().getState());
-            AirportFormattedDTO destination = new AirportFormattedDTO(flight.getDestination().getName(),
-                    flight.getDestination().getCode(), destinationCity);
+            Airport originAirport = originGate.getAirport();
+
+            CityFormattedDTO originCity = new CityFormattedDTO(
+                    originAirport.getCity().getName(),
+                    originAirport.getCity().getState());
+            AirportFormattedDTO origin = new AirportFormattedDTO(
+                    originAirport.getName(),
+                    originAirport.getCode(),
+                    originCity,
+                    originGate.getGateNumber());
+
+            // get destination gate and its airport information
+            Gate destinationGate = flight.getDestinationGate();
+
+            Airport destinationAirport = destinationGate.getAirport();
+
+            CityFormattedDTO destinationCity = new CityFormattedDTO(
+                    destinationAirport.getCity().getName(),
+                    destinationAirport.getCity().getState());
+            AirportFormattedDTO destination = new AirportFormattedDTO(
+                    destinationAirport.getName(),
+                    destinationAirport.getCode(),
+                    destinationCity,
+                    destinationGate.getGateNumber());
 
             // get departure/arrival as string
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a");
@@ -90,12 +107,20 @@ public class PassengerService {
             String arrivalString = flight.getArrival().format(formatter);
 
             // get aircraft details
-            AircraftFormattedDTO aircraft = new AircraftFormattedDTO(flight.getAircraft().getId(),
-                    flight.getAircraft().getType(), flight.getAircraft().getAirline().getName());
+            AircraftFormattedDTO aircraft = new AircraftFormattedDTO(
+                    flight.getAircraft().getId(),
+                    flight.getAircraft().getType(),
+                    flight.getAircraft().getAirline().getName());
 
-            FlightTableDTO flightTable = new FlightTableDTO(flight.getId(), departureString, arrivalString,
-                    origin, destination,
-                    aircraft, flight.getNumberOfPassengers());
+            // build FlightTableDTO
+            FlightTableDTO flightTable = new FlightTableDTO(
+                    flight.getId(),
+                    departureString,
+                    arrivalString,
+                    origin,
+                    destination,
+                    aircraft,
+                    flight.getNumberOfPassengers());
 
             flightTables.add(flightTable);
         }
