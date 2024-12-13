@@ -1,8 +1,12 @@
 package com.keyin.gate;
 
 import com.keyin.airport.Airport;
+import com.keyin.flight.Flight;
 import com.keyin.views.Views;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.*;
@@ -12,16 +16,24 @@ public class Gate {
     // instance variables
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({ Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
+    @JsonView({ Views.AirportView.class, Views.FlightView.class })
     private int id;
 
-    @JsonView({ Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
+    @JsonView({ Views.AirportView.class, Views.FlightView.class })
     private String gateNumber;
 
     @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "airport_id")
+    @JoinColumn(name = "airport_id", nullable = true)
+    @JsonView({ Views.FlightView.class })
     private Airport airport;
+
+    @OneToMany(mappedBy = "originGate")
+    @JsonView({ Views.AirportView.class })
+    private List<Flight> originFlights = new ArrayList<>();
+
+    @OneToMany(mappedBy = "destinationGate")
+    @JsonView({ Views.AirportView.class })
+    private List<Flight> destinationFlights = new ArrayList<>();
 
     // constructors
     public Gate() {

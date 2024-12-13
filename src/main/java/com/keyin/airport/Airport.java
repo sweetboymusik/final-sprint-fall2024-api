@@ -3,6 +3,7 @@ package com.keyin.airport;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.keyin.city.City;
 import com.keyin.gate.Gate;
@@ -27,7 +28,8 @@ public class Airport {
     private City city;
 
     @OneToMany(mappedBy = "airport", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonView({ Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
+    @JsonView({ Views.AirportView.class, Views.PassengerView.class })
+    @JsonManagedReference
     private List<Gate> gates = new ArrayList<>();
 
     // constructors

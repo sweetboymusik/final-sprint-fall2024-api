@@ -3,7 +3,7 @@ package com.keyin.flight;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.keyin.aircraft.Aircraft;
-import com.keyin.airport.Airport;
+import com.keyin.gate.Gate;
 import com.keyin.passenger.Passenger;
 import com.keyin.views.Views;
 import jakarta.persistence.*;
@@ -14,61 +14,64 @@ import java.util.List;
 
 @Entity
 public class Flight {
+    // instance variables
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({ Views.FlightView.class, Views.PassengerView.class })
+    @JsonView({ Views.FlightView.class, Views.PassengerView.class, Views.AirportView.class })
     private int id;
 
-    @JsonView({ Views.FlightView.class, Views.PassengerView.class })
+    @JsonView({ Views.FlightView.class, Views.PassengerView.class, Views.AirportView.class })
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     private LocalDateTime departure;
 
-    @JsonView({ Views.FlightView.class, Views.PassengerView.class })
+    @JsonView({ Views.FlightView.class, Views.PassengerView.class, Views.AirportView.class })
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     private LocalDateTime arrival;
 
     @ManyToOne
+    @JoinColumn(name = "origin_gate_id", nullable = true)
     @JsonView({ Views.FlightView.class, Views.PassengerView.class })
-    private Airport origin;
+    private Gate originGate;
 
     @ManyToOne
+    @JoinColumn(name = "destination_gate_id", nullable = true)
     @JsonView({ Views.FlightView.class, Views.PassengerView.class })
-    private Airport destination;
+    private Gate destinationGate;
 
     @ManyToOne
     @JsonView({ Views.FlightView.class, Views.PassengerView.class })
     private Aircraft aircraft;
 
-    @JsonView(Views.FlightView.class)
+    @JsonView({ Views.FlightView.class, Views.AirportView.class })
     private int numberOfPassengers;
 
     @ManyToMany(mappedBy = "flights")
-    @JsonView(Views.FlightView.class)
+    @JsonView({ Views.FlightView.class })
     private List<Passenger> passengerList;
 
     // constructors
     public Flight() {
     }
 
-    public Flight(LocalDateTime departure, LocalDateTime arrival, Airport origin, Airport destination,
+    public Flight(LocalDateTime departure, LocalDateTime arrival, Gate originGate, Gate destinationGate,
             Aircraft aircraft, int numberOfPassengers) {
         this.departure = departure;
         this.arrival = arrival;
-        this.origin = origin;
-        this.destination = destination;
+        this.originGate = originGate;
+        this.destinationGate = destinationGate;
         this.aircraft = aircraft;
         this.numberOfPassengers = numberOfPassengers;
-        this.passengerList = new ArrayList<Passenger>();
+        this.passengerList = new ArrayList<>();
     }
 
-    public Flight(FlightDTO flightDTO, Airport origin, Airport destination, Aircraft aircraft) {
+    public Flight(FlightDTO flightDTO, Gate originGate, Gate destinationGate, Aircraft aircraft) {
         this.departure = flightDTO.getDeparture();
         this.arrival = flightDTO.getArrival();
-        this.origin = origin;
-        this.destination = destination;
+        this.originGate = originGate;
+        this.destinationGate = destinationGate;
         this.aircraft = aircraft;
         this.numberOfPassengers = flightDTO.getNumberOfPassengers();
-        this.passengerList = new ArrayList<Passenger>();
+        this.passengerList = new ArrayList<>();
     }
 
     // getters and setters
@@ -96,20 +99,20 @@ public class Flight {
         this.arrival = arrival;
     }
 
-    public Airport getOrigin() {
-        return origin;
+    public Gate getOriginGate() {
+        return originGate;
     }
 
-    public void setOrigin(Airport origin) {
-        this.origin = origin;
+    public void setOriginGate(Gate originGate) {
+        this.originGate = originGate;
     }
 
-    public Airport getDestination() {
-        return destination;
+    public Gate getDestinationGate() {
+        return destinationGate;
     }
 
-    public void setDestination(Airport destination) {
-        this.destination = destination;
+    public void setDestinationGate(Gate destinationGate) {
+        this.destinationGate = destinationGate;
     }
 
     public Aircraft getAircraft() {

@@ -1,25 +1,28 @@
 package com.keyin.flight;
 
-
 import java.time.LocalDateTime;
 
 public class FlightDTO {
+    // instance variables
     private LocalDateTime departure;
     private LocalDateTime arrival;
-    private int originAirportId;
-    private int destinationAirportId;
+    private int originGateId;
+    private int destinationGateId;
     private int aircraftId;
     private int numberOfPassengers;
 
-    public FlightDTO(LocalDateTime departure, LocalDateTime arrival, int originAirportId, int destinationAirportId, int aircraftId, int numberOfPassengers) {
+    // constructors
+    public FlightDTO(LocalDateTime departure, LocalDateTime arrival, int originGateId, int destinationGateId,
+            int aircraftId, int numberOfPassengers) {
         this.departure = departure;
         this.arrival = arrival;
-        this.originAirportId = originAirportId;
-        this.destinationAirportId = destinationAirportId;
+        this.originGateId = originGateId;
+        this.destinationGateId = destinationGateId;
         this.aircraftId = aircraftId;
         this.numberOfPassengers = numberOfPassengers;
     }
 
+    // getters and setters
     public LocalDateTime getDeparture() {
         return departure;
     }
@@ -36,20 +39,20 @@ public class FlightDTO {
         this.arrival = arrival;
     }
 
-    public int getOriginAirportId() {
-        return originAirportId;
+    public int getOriginGateId() {
+        return originGateId;
     }
 
-    public void setOriginAirportId(int originAirportId) {
-        this.originAirportId = originAirportId;
+    public void setOriginGateId(int originGateId) {
+        this.originGateId = originGateId;
     }
 
-    public int getDestinationAirportId() {
-        return destinationAirportId;
+    public int getDestinationGateId() {
+        return destinationGateId;
     }
 
-    public void setDestinationAirportId(int destinationAirportId) {
-        this.destinationAirportId = destinationAirportId;
+    public void setDestinationGateId(int destinationGateId) {
+        this.destinationGateId = destinationGateId;
     }
 
     public int getAircraftId() {
