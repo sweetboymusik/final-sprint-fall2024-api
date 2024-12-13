@@ -7,6 +7,7 @@ import com.keyin.views.Views;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.*;
@@ -24,6 +25,7 @@ public class Gate {
 
     @ManyToOne
     @JoinColumn(name = "airport_id", nullable = true)
+    @JsonBackReference
     @JsonView({ Views.FlightView.class })
     private Airport airport;
 
@@ -68,4 +70,21 @@ public class Gate {
     public void setAirport(Airport airport) {
         this.airport = airport;
     }
+
+    public List<Flight> getOriginFlights() {
+        return this.originFlights;
+    }
+
+    public void setOriginFlights(List<Flight> originFlights) {
+        this.originFlights = originFlights;
+    }
+
+    public List<Flight> getDestinationFlights() {
+        return this.destinationFlights;
+    }
+
+    public void setDestinationFlights(List<Flight> destinationFlights) {
+        this.destinationFlights = destinationFlights;
+    }
+
 }

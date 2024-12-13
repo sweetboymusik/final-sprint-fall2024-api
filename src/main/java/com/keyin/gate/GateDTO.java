@@ -5,7 +5,7 @@ public class GateDTO {
     private int id;
     private String gateNumber;
 
-    // connstructor
+    // constructor
     public GateDTO(int id, String gateNumber) {
         this.id = id;
         this.gateNumber = gateNumber;

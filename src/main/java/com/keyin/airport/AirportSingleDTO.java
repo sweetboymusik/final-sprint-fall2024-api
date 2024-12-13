@@ -1,61 +1,45 @@
 package com.keyin.airport;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.keyin.city.City;
-import com.keyin.gate.Gate;
+import com.keyin.gate.GateTableDTO;
 import com.keyin.views.Views;
-import jakarta.persistence.*;
 
-@Entity
-public class Airport {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AirportSingleDTO {
+    // instance variables
     @JsonView({ Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
     private int id;
-
     @JsonView({ Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
     private String name;
-
     @JsonView({ Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
     private String code;
-
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    @JsonBackReference
-    @JsonView({ Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
+    @JsonView({ Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
     private City city;
-
-    @OneToMany(mappedBy = "airport", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonView({ Views.AirportView.class, Views.PassengerView.class })
-    @JsonManagedReference
-    private List<Gate> gates = new ArrayList<>();
+    @JsonView({ Views.CityView.class, Views.AirportView.class, Views.FlightView.class, Views.PassengerView.class })
+    private List<GateTableDTO> gates;
 
     // constructors
-    public Airport() {
+    public AirportSingleDTO(Airport airport, List<GateTableDTO> gates) {
+        this.id = airport.getId();
+        this.name = airport.getName();
+        this.code = airport.getCode();
+        this.city = airport.getCity();
+        this.gates = gates;
     }
 
-    public Airport(String name, String code, City city) {
+    public AirportSingleDTO(int id, String name, String code, City city) {
+        this.id = id;
         this.name = name;
         this.code = code;
         this.city = city;
-        this.gates = new ArrayList<>();
-    }
-
-    public Airport(AirportDTO airportDTO, City city) {
-        this.name = airportDTO.getName();
-        this.code = airportDTO.getCode();
-        this.city = city;
-        this.gates = new ArrayList<>();
+        this.gates = null;
     }
 
     // getters and setters
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -63,7 +47,7 @@ public class Airport {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -71,7 +55,7 @@ public class Airport {
     }
 
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     public void setCode(String code) {
@@ -79,18 +63,19 @@ public class Airport {
     }
 
     public City getCity() {
-        return city;
+        return this.city;
     }
 
     public void setCity(City city) {
         this.city = city;
     }
 
-    public List<Gate> getGates() {
+    public List<GateTableDTO> getGates() {
         return this.gates;
     }
 
-    public void setGates(List<Gate> gates) {
+    public void setGates(List<GateTableDTO> gates) {
         this.gates = gates;
     }
+
 }

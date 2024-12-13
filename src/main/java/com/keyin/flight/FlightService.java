@@ -4,9 +4,11 @@ import com.keyin.aircraft.Aircraft;
 import com.keyin.aircraft.AircraftFormattedDTO;
 import com.keyin.aircraft.AircraftService;
 import com.keyin.airport.AirportFormattedDTO;
+import com.keyin.airport.AirportSingleDTO;
 import com.keyin.city.CityFormattedDTO;
 import com.keyin.exceptions.EntityNotFoundException;
 import com.keyin.gate.Gate;
+import com.keyin.gate.GateFlightDTO;
 import com.keyin.gate.GateRepository;
 import com.keyin.passenger.Passenger;
 import com.keyin.passenger.PassengerRepository;
@@ -104,7 +106,7 @@ public class FlightService {
                 originGate,
                 destinationGate,
                 aircraft,
-                flightDTO.getNumberOfPassengers());
+                0);
 
         return flightRepository.save(flight);
     }
@@ -131,6 +133,38 @@ public class FlightService {
     public Flight getFlightById(int id) {
         return flightRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Flight not found"));
+    }
+
+    public FlightDetailsDTO getFlightDetailsById(int id) {
+        Flight flight = flightRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Flight not found"));
+
+        GateFlightDTO originGateDTO = new GateFlightDTO(
+                flight.getOriginGate().getId(),
+                flight.getOriginGate().getGateNumber(),
+                new AirportSingleDTO(
+                        flight.getOriginGate().getAirport().getId(),
+                        flight.getOriginGate().getAirport().getName(),
+                        flight.getOriginGate().getAirport().getCode(),
+                        flight.getOriginGate().getAirport().getCity()));
+
+        GateFlightDTO destinationGateDTO = new GateFlightDTO(
+                flight.getDestinationGate().getId(),
+                flight.getDestinationGate().getGateNumber(),
+                new AirportSingleDTO(
+                        flight.getDestinationGate().getAirport().getId(),
+                        flight.getDestinationGate().getAirport().getName(),
+                        flight.getDestinationGate().getAirport().getCode(),
+                        flight.getDestinationGate().getAirport().getCity()));
+
+        return new FlightDetailsDTO(
+                flight.getId(),
+                flight.getDeparture(),
+                flight.getArrival(),
+                originGateDTO,
+                destinationGateDTO,
+                flight.getPassengerList(),
+                flight.getAircraft());
     }
 
     public Flight updateFlightById(int id, FlightDTO flightDTO) {

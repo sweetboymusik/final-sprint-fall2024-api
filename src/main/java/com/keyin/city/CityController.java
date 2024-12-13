@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.keyin.views.Views;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,9 +30,10 @@ public class CityController {
         return cityService.getCityByName(name);
     }
 
-    @PostMapping("/city")
+    @PostMapping(path = "/city", consumes = MediaType.APPLICATION_JSON_VALUE)
     @JsonView(Views.CityView.class)
     public City addCity(@RequestBody City city) {
+        System.out.println("Incoming City: " + city);
         return cityService.addCity(city);
     }
 

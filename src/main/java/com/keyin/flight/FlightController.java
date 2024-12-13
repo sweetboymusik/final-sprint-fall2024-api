@@ -18,8 +18,8 @@ public class FlightController {
 
     @GetMapping("/flight/id/{id}")
     @JsonView(Views.FlightView.class)
-    public Flight getFlightById(@PathVariable int id) {
-        return flightService.getFlightById(id);
+    public FlightDetailsDTO getFlightById(@PathVariable int id) {
+        return flightService.getFlightDetailsById(id);
     }
 
     @PostMapping("/flight")
