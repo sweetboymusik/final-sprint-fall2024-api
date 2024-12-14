@@ -11,19 +11,19 @@ import com.keyin.gate.GateTableDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AirportService {
-    @Autowired
-    private AirportRepository airportRepository;
+    private final AirportRepository airportRepository;
+    private final CityService cityService;
+    private final GateRepository gateRepository;
 
-    @Autowired
-    private CityService cityService;
-
-    @Autowired
-    private GateRepository gateRepository;
+    public AirportService(AirportRepository airportRepository, CityService cityService, GateRepository gateRepository) {
+        this.airportRepository = airportRepository;
+        this.cityService = cityService;
+        this.gateRepository = gateRepository;
+    }
 
     public Iterable<Airport> getAllAirports() {
         return airportRepository.findAll();
@@ -84,16 +84,6 @@ public class AirportService {
 
         AirportSingleDTO airportSingleDTO = new AirportSingleDTO(airport, gateTableItems);
         return airportSingleDTO;
-    }
-
-    public Airport getAirportByName(String name) {
-        Airport airport = airportRepository.findByName(name);
-
-        if (airport == null) {
-            throw new EntityNotFoundException("Airport not found");
-        }
-
-        return airport;
     }
 
     public List<Gate> getGatesByAirportId(int airportId) {
