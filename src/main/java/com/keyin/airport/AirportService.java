@@ -86,16 +86,6 @@ public class AirportService {
         return airportSingleDTO;
     }
 
-    public Airport getAirportByName(String name) {
-        Airport airport = airportRepository.findByName(name);
-
-        if (airport == null) {
-            throw new EntityNotFoundException("Airport not found");
-        }
-
-        return airport;
-    }
-
     public List<Gate> getGatesByAirportId(int airportId) {
         Airport airport = airportRepository.findById(airportId)
                 .orElseThrow(() -> new EntityNotFoundException("Airport not found"));
