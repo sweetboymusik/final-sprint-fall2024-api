@@ -5,8 +5,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GateService {
-    @Autowired
     private GateRepository gateRepository;
+
+    @Autowired
+    public GateService(GateRepository gateRepository) {
+        this.gateRepository = gateRepository;
+    }
 
     public Gate addGate(Gate gate) {
         return gateRepository.save(gate);

@@ -26,12 +26,6 @@ public class AirportController {
         return airportService.getSingleAirportById(id);
     }
 
-    @GetMapping("/airport/name/{name}")
-    @JsonView(Views.AirportView.class)
-    public Airport getAirportByName(@PathVariable String name) {
-        return airportService.getAirportByName(name);
-    }
-
     @GetMapping("/airport/{id}/gates")
     @JsonView(Views.AirportView.class)
     public List<Gate> getGatesByAirportId(@PathVariable int id) {
