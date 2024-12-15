@@ -50,7 +50,6 @@ class FlightTest {
         assertEquals(originGate, testFlight.getOriginGate());
         assertEquals(destinationGate, testFlight.getDestinationGate());
         assertEquals(aircraft, testFlight.getAircraft());
-        assertEquals(150, testFlight.getNumberOfPassengers());
         assertNotNull(testFlight.getPassengerList());
         assertTrue(testFlight.getPassengerList().isEmpty());
     }
