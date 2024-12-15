@@ -19,6 +19,7 @@ public class FlightTableDTO {
     private AirportFormattedDTO destination;
     @JsonView({ Views.PassengerView.class })
     private AircraftFormattedDTO aircraft;
+    @JsonView({})
     private int numberOfPassengers;
 
     // constructors

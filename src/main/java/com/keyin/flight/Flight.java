@@ -42,7 +42,7 @@ public class Flight {
     @JsonView({ Views.FlightView.class, Views.PassengerView.class })
     private Aircraft aircraft;
 
-    @JsonView({ Views.FlightView.class, Views.AirportView.class })
+    @JsonView({})
     private int numberOfPassengers;
 
     @ManyToMany(mappedBy = "flights")
@@ -60,7 +60,7 @@ public class Flight {
         this.originGate = originGate;
         this.destinationGate = destinationGate;
         this.aircraft = aircraft;
-        this.numberOfPassengers = numberOfPassengers;
+        this.numberOfPassengers = 0;
         this.passengerList = new ArrayList<>();
     }
 
@@ -70,7 +70,7 @@ public class Flight {
         this.originGate = originGate;
         this.destinationGate = destinationGate;
         this.aircraft = aircraft;
-        this.numberOfPassengers = flightDTO.getNumberOfPassengers();
+        this.numberOfPassengers = 0;
         this.passengerList = new ArrayList<>();
     }
 
